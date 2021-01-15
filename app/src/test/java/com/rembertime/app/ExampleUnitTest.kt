@@ -1,4 +1,4 @@
-package com.rembertime.location
+package com.rembertime.app
 
 import org.junit.Test
 
