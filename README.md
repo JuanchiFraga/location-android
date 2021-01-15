@@ -2,7 +2,6 @@
 
 ## Status
 [![Codecov](https://codecov.io/gh/rembertime/location-android/branch/develop/graph/badge.svg?token=7KHDY9ATMG)](https://codecov.io/gh/rembertime/location-android) ![Build status](https://github.com/rembertime/location-android/workflows/Build%20status/badge.svg) [![API](https://img.shields.io/badge/API-%2B16-green)](https://android-arsenal.com/api?level=16#l16) [![](https://jitpack.io/v/rembertime/location-android.svg)](https://jitpack.io/#rembertime/location-android)
-
   
 ## Description
 A simple library based on Google Api that through coroutines wraps google services to obtain the user's location by just calling the suspend operator of a use case.
@@ -19,7 +18,7 @@ allprojects {
 2. Add the dependency
 ```
 dependencies {
-    implementation 'com.github.rembertime:location-android:1.0.0'
+    implementation 'com.github.rembertime:location-android:0.1.0'
 }
 ```
 
