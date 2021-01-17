@@ -14,8 +14,9 @@ import com.rembertime.location.factory.LocationUseCaseProvider
 import com.rembertime.location.source.listener.GoogleConnectionListener
 import com.rembertime.location.util.DispatcherProvider
 import com.rembertime.location.util.LocationUtils
-import com.rembertime.location.util.await
+import com.rembertime.location.util.extension.await
 import kotlinx.coroutines.CompletableDeferred
+import java.lang.RuntimeException
 
 class GoogleLocationSource(
     private val locationProviderClient: FusedLocationProviderClient,
@@ -55,7 +56,7 @@ class GoogleLocationSource(
 
     @SuppressLint("MissingPermission")
     private fun updateLocation() {
-        Looper.myLooper()?.let { Looper.prepare() }
+        try { Looper.prepare() } catch (e: RuntimeException) { }
         LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient, locationRequest, this, Looper.myLooper())
     }
 

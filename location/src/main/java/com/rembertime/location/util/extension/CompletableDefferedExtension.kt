@@ -1,4 +1,4 @@
-package com.rembertime.location.util
+package com.rembertime.location.util.extension
 
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.GlobalScope
