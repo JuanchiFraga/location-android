@@ -67,7 +67,7 @@ class LocationSampleActivity : AppCompatActivity() {
         addressInfo.forEach {
             sampleRowContainer.addView(LocationSampleRowView(this).apply {
                 setTitle(it.title)
-                setDescription(it.description)
+                setDescription(it.description ?: getString(R.string.location_sample_could_not_fetch))
             })
         }
     }

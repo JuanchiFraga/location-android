@@ -7,5 +7,6 @@
     <string name="location_sample_title">Rembertime Location</string>
     <string name="location_sample_button">refresh location</string>
     <string name="location_sample_error_message">We couldn\'t find any location, please make sure you have the GPS on.</string>
+    <string name="location_sample_could_not_fetch">Couldn\'t fetch</string>
 
 </resources>
