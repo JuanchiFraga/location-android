@@ -1,7 +1,7 @@
 # Rembertime location
 
 ## Status
-[![Codecov](https://codecov.io/gh/rembertime/location-android/branch/develop/graph/badge.svg?token=7KHDY9ATMG)](https://codecov.io/gh/rembertime/location-android) ![Build status](https://github.com/rembertime/location-android/workflows/Build%20status/badge.svg) [![API](https://img.shields.io/badge/API-%2B16-green)](https://android-arsenal.com/api?level=16#l16) [![](https://jitpack.io/v/rembertime/location-android.svg)](https://jitpack.io/#rembertime/location-android)
+[![Codecov](https://codecov.io/gh/rembertime/location-android/branch/develop/graph/badge.svg?token=7KHDY9ATMG)](https://codecov.io/gh/rembertime/location-android) ![Build status](https://github.com/rembertime/location-android/workflows/Build%20status/badge.svg) [![API](https://img.shields.io/badge/API-%2B16-brightgreen)](https://android-arsenal.com/api?level=16#l16) [![](https://jitpack.io/v/rembertime/location-android.svg)](https://jitpack.io/#rembertime/location-android)
   
 ## Description
 A simple library based on Google Api that through coroutines wraps google services to obtain the user's location by just calling the suspend operator of a use case.
@@ -18,7 +18,7 @@ allprojects {
 2. Add the dependency
 ```
 dependencies {
-    implementation 'com.github.rembertime:location-android:0.1.0'
+    implementation 'com.github.rembertime:location-android:0.1.1'
 }
 ```
 
@@ -30,7 +30,7 @@ LocationUseCaseProvider.Builder(aplicationContext).build()
 
 You can customize your GetLocationUseCase by setting the following properties
 ```
-LocationUseCaseProvider.Builder(aplicationContext).build()
+LocationUseCaseProvider.Builder(aplicationContext)
             .withTimeOutPerAttemptInMillis(200)
             .withRetryDelayInMillis(150)
             .withAttempts(5)
@@ -41,6 +41,14 @@ LocationUseCaseProvider.Builder(aplicationContext).build()
             .withRequestPriority(PRIORITY_BALANCED_POWER_ACCURACY)
             .build()
 ```
+
+## Test
+You can test the use case configuration for your convenience, all you have to do is:
+1. Clone the project `https://github.com/rembertime/location-android.git`. 
+2. Then go to `di -> LocationSampleModule`.
+3. Modify the configuration, build the app.
+
+Voila! That's how easy you can test your configuration.
 
 ## Contribute
 New features, bug fixes and improvements in the translation are welcome! For questions and suggestions use the [issues](https://github.com/JuanchiFraga/rembertime-location-android/issues).
