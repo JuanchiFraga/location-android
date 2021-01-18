@@ -12,9 +12,9 @@ import com.rembertime.app.model.LocationSampleUiModel
 import com.rembertime.app.model.RowModel
 import com.rembertime.app.repository.LocationSampleRepository
 import com.rembertime.app.util.Event
-import com.rembertime.location.usecase.GetLocationUseCase
 import com.rembertime.location.util.DispatcherProvider
 import com.rembertime.location.util.LocationUtils
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -25,16 +25,25 @@ class LocationSampleViewModel @ViewModelInject constructor(
     private val mapper: LocationMapper
 ) : ViewModel() {
 
+    private var fetchLocationJob: Job? = null
+
     private var _locationSampleModel = MutableLiveData<LocationSampleUiModel>()
     val locationSampleModel: LiveData<LocationSampleUiModel>
         get() = _locationSampleModel
 
-    fun fetchUserLocation() =  viewModelScope.launch(dispatcherProvider.io) {
-        updateUi(showLoading = true)
-        locationRepository.getNewLocation()?.let {
-            updateUi(userLocation = mapper.toRows(it), showLoading = false)
-        } ?: run {
-            updateUi(errorMessage = R.string.location_sample_error_message, showLoading = false)
+    private var responseTime = 0L
+
+    fun fetchUserLocation() {
+        fetchLocationJob?.cancel()
+        fetchLocationJob = viewModelScope.launch(dispatcherProvider.io) {
+            updateUi(showLoading = true)
+            responseTime = System.currentTimeMillis()
+            locationRepository.getNewLocation()?.let {
+                responseTime = System.currentTimeMillis() - responseTime
+                updateUi(userLocation = mapper.toRows(it, responseTime), showLoading = false)
+            } ?: run {
+                updateUi(errorMessage = R.string.location_sample_error_message, showLoading = false)
+            }
         }
     }
 

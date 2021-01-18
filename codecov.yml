@@ -1,0 +1,3 @@
+ignore:
+  - "sample/*"
+  - "location/src/main/java/com/rembertime/location/util"

@@ -18,7 +18,7 @@ allprojects {
 2. Add the dependency
 ```
 dependencies {
-    implementation 'com.github.rembertime:location-android:0.1.0'
+    implementation 'com.github.rembertime:location-android:0.1.1'
 }
 ```
 
@@ -41,6 +41,14 @@ LocationUseCaseProvider.Builder(aplicationContext)
             .withRequestPriority(PRIORITY_BALANCED_POWER_ACCURACY)
             .build()
 ```
+
+## Test
+You can test the use case configuration for your convenience, all you have to do is:
+1. Clone the project `https://github.com/rembertime/location-android.git`. 
+2. Then go to `di -> LocationSampleModule`.
+3. Modify the configuration, build the app.
+
+Voila! That's how easy you can test your configuration.
 
 ## Contribute
 New features, bug fixes and improvements in the translation are welcome! For questions and suggestions use the [issues](https://github.com/JuanchiFraga/rembertime-location-android/issues).

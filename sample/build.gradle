@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId "com.rembertime.app"
-        minSdkVersion 17
+        minSdkVersion 23
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -33,6 +33,10 @@ android {
 
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+
+    viewBinding {
+        enabled = true
     }
 }
 

@@ -1,5 +1,6 @@
 package com.rembertime.app.ui.activity
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View.GONE
@@ -79,6 +80,9 @@ class LocationSampleActivity : AppCompatActivity() {
     }
 
     companion object {
+
         const val LOCATION_PERMISSION_REQUEST_CODE = 12289
+
+        fun newIntent(context: Context) = Intent(context, LocationSampleActivity::class.java)
     }
 }

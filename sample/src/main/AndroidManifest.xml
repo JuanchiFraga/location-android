@@ -19,7 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/SampleAppStyle">
 
-        <activity android:name=".ui.activity.LocationSampleActivity"
+        <activity android:name=".permission.activity.LocationPermissionActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,7 +28,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".permission.activity.LocationPermissionActivity"
+        <activity android:name=".ui.activity.LocationSampleActivity"
             android:screenOrientation="portrait">
         </activity>
 

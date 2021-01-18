@@ -31,7 +31,7 @@ class LocationPermissionViewModel @ViewModelInject constructor(
 
     fun havePermissionAndGpsIsEnabled() = locationUtils.havePermission() && locationUtils.isGpsEnabled()
 
-    private suspend fun updateUi(showGpsAlert: Boolean? = null) = withContext(dispatcherProvider.ui)  {
+    private suspend fun updateUi(showGpsAlert: Boolean? = null) = withContext(dispatcherProvider.ui) {
         _permissionModel.value = LocationPermissionUiModel(Event(showGpsAlert))
     }
 }

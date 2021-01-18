@@ -13,24 +13,31 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import java.util.*
+import java.util.Locale
 import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
 @Module
 object LocationSampleModule {
 
+    private const val TIME_OUT_PER_ATTEMPT = 200L
+    private const val RETRY_DELAY_IN_MILLIS = 150L
+    private const val ATTEMPTS = 5
+    private const val REQUEST_NUMBER = 1
+    private const val INTERVAL = 10000L
+    private const val FASTEST_INTERVAL = 5000L
+
     @Singleton
     @Provides
     fun provideGetLocationUseCase(@ApplicationContext context: Context): GetLocationUseCase {
         return LocationUseCaseProvider.Builder(context)
-            .withTimeOutPerAttemptInMillis(200)
-            .withRetryDelayInMillis(150)
-            .withAttempts(5)
+            .withTimeOutPerAttemptInMillis(TIME_OUT_PER_ATTEMPT)
+            .withRetryDelayInMillis(RETRY_DELAY_IN_MILLIS)
+            .withAttempts(ATTEMPTS)
             .withRetryStrategy(EXPONENTIAL_BACK_OFF)
-            .withNumberOfLocationUpdates(1)
-            .withFastestIntervalReceivingInMillis(5000)
-            .withIntervalReceivingInMillis(10000)
+            .withNumberOfLocationUpdates(REQUEST_NUMBER)
+            .withFastestIntervalReceivingInMillis(FASTEST_INTERVAL)
+            .withIntervalReceivingInMillis(INTERVAL)
             .withRequestPriority(PRIORITY_BALANCED_POWER_ACCURACY)
             .build()
     }

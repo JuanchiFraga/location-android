@@ -20,7 +20,7 @@ class LocationSampleRepository @Inject constructor(private val getLocation: GetL
     }
 
     private fun areTheSameLocation(newLocation: Location): Boolean {
-       return newLocation.latitude == currentLocation?.latitude && newLocation.longitude == currentLocation?.longitude
+        return newLocation.latitude == currentLocation?.latitude && newLocation.longitude == currentLocation?.longitude
     }
 
     private fun updateCurrentAndGet(newLocation: Location?): Location? {

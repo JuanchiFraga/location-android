@@ -6,7 +6,12 @@ import android.location.Location
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.common.api.ResultCallback
 import com.google.android.gms.common.api.Status
-import com.google.android.gms.location.*
+import com.google.android.gms.location.LocationListener
+import com.google.android.gms.location.LocationSettingsResult
+import com.google.android.gms.location.LocationSettingsRequest
+import com.google.android.gms.location.LocationSettingsStatusCodes
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.LocationRequest
 
 class TurnGpsAlert(
     private val activity: Activity,
@@ -30,7 +35,7 @@ class TurnGpsAlert(
         try {
             status.startResolutionForResult(activity, REQUEST_CHECK_SETTINGS)
         } catch (e: SendIntentException) {
-            //Nothing to do
+            /*  Nothing to do */
         }
     }
 

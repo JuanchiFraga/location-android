@@ -2,11 +2,9 @@ package com.rembertime.app.permission.activity
 
 import android.Manifest.permission.ACCESS_COARSE_LOCATION
 import android.Manifest.permission.ACCESS_FINE_LOCATION
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import androidx.activity.viewModels
@@ -18,6 +16,7 @@ import com.rembertime.app.permission.gps.GpsListener
 import com.rembertime.app.permission.gps.TurnGpsAlert
 import com.rembertime.app.permission.model.LocationPermissionUiModel
 import com.rembertime.app.permission.viewmodel.LocationPermissionViewModel
+import com.rembertime.app.ui.activity.LocationSampleActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.location_permission_activity.*
 
@@ -40,6 +39,9 @@ class LocationPermissionActivity : AppCompatActivity(), GpsListener {
         super.onResume()
         if (viewModel.havePermissionAndGpsIsEnabled()) {
             onPermissionGranted()
+        }
+        if (viewModel.havePermissions() && viewModel.isGpsEnabled().not()) {
+            permissionButton.setOnClickListener { showGpsAlert() }
         }
     }
 
@@ -89,9 +91,10 @@ class LocationPermissionActivity : AppCompatActivity(), GpsListener {
     }
 
     private fun arePermissionsGranted(requestCode: Int, grantResults: IntArray): Boolean {
-        return viewModel.havePermissionAndGpsIsEnabled()
-               || requestCode == REQUEST_CODE_PERMISSION && grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED
-
+        return viewModel.havePermissionAndGpsIsEnabled() ||
+                requestCode == REQUEST_CODE_PERMISSION &&
+                grantResults.isNotEmpty() &&
+                grantResults[0] == PackageManager.PERMISSION_GRANTED
     }
 
     private fun requestPermissions() {
@@ -103,26 +106,11 @@ class LocationPermissionActivity : AppCompatActivity(), GpsListener {
     }
 
     private fun hasAnyPermissionPermanentlyDenied(): Boolean {
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            LOCATION_PERMISSIONS.any { permission -> shouldShowRequestPermissionRationale(permission).not() }
-        } else {
-            true
-        }
-    }
-
-    override fun onBackPressed() {
-        super.onBackPressed()
-        onPermissionRejected()
+        return LOCATION_PERMISSIONS.any { permission -> shouldShowRequestPermissionRationale(permission).not() }
     }
 
     private fun onPermissionGranted() {
-        setResult(Activity.RESULT_OK)
-        finish()
-    }
-
-    private fun onPermissionRejected() {
-        setResult(Activity.RESULT_CANCELED)
-        finish()
+        startActivity(LocationSampleActivity.newIntent(this))
     }
 
     companion object {

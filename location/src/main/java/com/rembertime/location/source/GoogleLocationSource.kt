@@ -1,6 +1,5 @@
 package com.rembertime.location.source
 
-import android.annotation.SuppressLint
 import android.location.Location
 import android.os.Bundle
 import android.os.Looper
@@ -54,9 +53,9 @@ class GoogleLocationSource(
         if (googleApiClient.isConnected) updateLocation() else googleApiClient.connect()
     }
 
-    @SuppressLint("MissingPermission")
+    @SuppressWarnings("MissingPermission", "detekt:TooGenericExceptionCaught")
     private fun updateLocation() {
-        try { Looper.prepare() } catch (e: RuntimeException) { }
+        try { Looper.prepare() } catch (e: RuntimeException) { /* happens if the looper has already been prepared  */ }
         LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient, locationRequest, this, Looper.myLooper())
     }
 
@@ -64,7 +63,7 @@ class GoogleLocationSource(
         return googleApiClientConnectedStatus.await()
     }
 
-    @SuppressLint("MissingPermission")
+    @SuppressWarnings("MissingPermission")
     private fun requestLocation() {
         if (locationUtils.isGpsEnabled()) {
             val lastLocationTask: Task<Location?> = locationProviderClient.lastLocation
