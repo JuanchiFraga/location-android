@@ -1,6 +1,0 @@
-<resources>
-    <string name="app_name">LocationSampleApp</string>
-    <string name="location_permission_title">We need to access your location</string>
-    <string name="location_permission_subtitle">if you enable location, we can show you how well the library works.</string>
-    <string name="location_permission_button">enable permissions</string>
-</resources>
